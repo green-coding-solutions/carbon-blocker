@@ -23,9 +23,22 @@ namespace CarbonBlocker.Communications
             //request3.AddQueryParameter("location", "westeurope");
             var response3 = client3.Execute(request3);
             System.Console.WriteLine(response3.Content);
-            CarbonIntensityResponse[] carbonIntensityResponse = JsonSerializer.Deserialize<CarbonIntensityResponse[]>(response3.Content.ToString());
 
-            return carbonIntensityResponse[0].rating;
+            double rating = 0;
+
+            try
+            {
+                CarbonIntensityResponse[] carbonIntensityResponse = JsonSerializer.Deserialize<CarbonIntensityResponse[]>(response3.Content.ToString());
+                rating = carbonIntensityResponse[0].rating;
+            }
+            catch(Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+            
+
+
+            return rating;
         }
 
         public static  void CheckCarbonIntensity(string ipAddress, int limit, List<string> urls)

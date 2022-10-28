@@ -29,9 +29,9 @@ namespace CarbonBlocker.Communications
             GeoliteCountryResponse? geoliteResponse =
                            JsonSerializer.Deserialize<GeoliteCountryResponse>(response.Content.ToString());
 
-            log.Info("Country:" + geoliteResponse.country.iso_code);
+            log.Info("Country:" + geoliteResponse.registered_country.iso_code);
 
-            return geoliteResponse.country.iso_code;
+            return geoliteResponse.registered_country.iso_code;
         }
     }
 }
