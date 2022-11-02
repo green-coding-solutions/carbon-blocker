@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace CarbonBlocker.Communications
 {
     internal class HostsFileManager
     {
-        private static string hostPath = Directory.GetCurrentDirectory() + "\\hosts";// @"C:\Windows\System32\drivers\etc\hosts";
+        private static ILog log = log4net.LogManager.GetLogger(typeof(HostsFileManager));
+        private static string hostPath = @"C:\Windows\System32\drivers\etc\hosts";
         private static string beginCarbonBlockerSection = "#BEGIN CARBON BLOCKER SECTION#";
         private static string endCarbonBlockerSection = "#END CARBON BLOCKER SECTION#";
         public static void changeHostsFile(List<string> urls)
@@ -22,9 +24,9 @@ namespace CarbonBlocker.Communications
                 string host = new Uri(url).Host.ToLower();
                 sb.Append(Environment.NewLine + "127.0.0.1    " + host + Environment.NewLine);
                 //Block site on /etc/hosts
-                System.Console.WriteLine("************");
-                System.Console.WriteLine("BLOCKING HOST " + host);
-                System.Console.WriteLine("************");
+                log.Info("************");
+                log.Info("BLOCKING HOST " + host);
+                log.Info("************");
 
             }
             sb.Append(endCarbonBlockerSection);

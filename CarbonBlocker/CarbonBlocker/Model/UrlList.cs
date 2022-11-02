@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarbonBlocker.Data
+namespace CarbonBlocker.Model
 {
     public class UrlList
     {

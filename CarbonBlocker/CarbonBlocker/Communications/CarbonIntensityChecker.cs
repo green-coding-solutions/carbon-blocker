@@ -18,18 +18,22 @@ namespace CarbonBlocker.Communications
             var client3 = new RestClient("https://carbon-aware-api.azurewebsites.net/emissions/bylocations");
             var request3 = new RestRequest();
             request3.AddQueryParameter("location", location);
-            string now = DateTime.Now.ToString("yyyy-MM-ddTHH%3Amm%3A00Z");
-            request3.AddQueryParameter("time", time);
+            //string now = DateTime.Now.ToString("yyyy-MM-ddTHH%3Amm%3A00Z");
+            //request3.AddQueryParameter("time", time);
             //request3.AddQueryParameter("location", "westeurope");
             var response3 = client3.Execute(request3);
-            System.Console.WriteLine(response3.Content);
+            log.Info(response3.Content);
 
             double rating = 0;
 
             try
             {
-                CarbonIntensityResponse[] carbonIntensityResponse = JsonSerializer.Deserialize<CarbonIntensityResponse[]>(response3.Content.ToString());
-                rating = carbonIntensityResponse[0].rating;
+                if(response3.Content != null & response3.Content.Length > 0)
+                {
+                    CarbonIntensityResponse[] carbonIntensityResponse = JsonSerializer.Deserialize<CarbonIntensityResponse[]>(response3.Content.ToString());
+                    rating = carbonIntensityResponse[0].rating;
+                }
+                
             }
             catch(Exception ex)
             {
