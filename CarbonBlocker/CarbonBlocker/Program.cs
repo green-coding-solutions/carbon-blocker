@@ -39,8 +39,15 @@ IConfiguration config = new ConfigurationBuilder()
 var urls = config.GetSection("urls").Get<List<string>>();
 int limit = config.GetValue<int>("limit");
 int delay = config.GetValue<int>("delay");
+var hostsFilePath = config.GetSection("hosts_file_path").Get<string>();
+var azureRegionFilePath = config.GetSection("azure-region_file_path").Get<string>();
 
-foreach(string url in urls)
+
+//Clean hosts file to get real url ip address
+HostsFileManager.changeHostsFile(new List<string>(), hostsFilePath);
+
+
+foreach (string url in urls)
 {
     log.Info($"url = {url}");
 }
@@ -51,7 +58,7 @@ log.Info($"Check delay = {delay}");
 
 UrlList urlList = new UrlList();
 
-AzureRegions azureRegions = new AzureRegions();
+AzureRegions azureRegions = new AzureRegions(azureRegionFilePath);
 
 //Check public ip address
 string ipAddress = PublicIPAddressChecker.getPublicIpAddress();
@@ -151,12 +158,8 @@ var timer = new System.Threading.Timer((e) =>
     }    
     
 
-        HostsFileManager.changeHostsFile(urlsToBlock);
+        HostsFileManager.changeHostsFile(urlsToBlock, hostsFilePath);
 
 
 //}, null, startTimeSpan, periodTimeSpan);
 
-
-
-
-Console.ReadLine();

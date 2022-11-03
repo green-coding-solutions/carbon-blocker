@@ -10,26 +10,26 @@ namespace CarbonBlocker.Communications
     internal class HostsFileManager
     {
         private static ILog log = log4net.LogManager.GetLogger(typeof(HostsFileManager));
-        private static string hostPath = @"C:\Windows\System32\drivers\etc\hosts";
+
         private static string beginCarbonBlockerSection = "#BEGIN CARBON BLOCKER SECTION#";
         private static string endCarbonBlockerSection = "#END CARBON BLOCKER SECTION#";
-        public static void changeHostsFile(List<string> urls)
+        public static void changeHostsFile(List<string> urls, string hostPath)
         {
             
             
             StringBuilder sb = new StringBuilder();
-            sb.Append(beginCarbonBlockerSection);
+            sb.Append(beginCarbonBlockerSection + Environment.NewLine);
             foreach (string url in urls)
             {
                 string host = new Uri(url).Host.ToLower();
-                sb.Append(Environment.NewLine + "127.0.0.1    " + host + Environment.NewLine);
+                sb.Append("127.0.0.1    " + host + Environment.NewLine);
                 //Block site on /etc/hosts
                 log.Info("************");
                 log.Info("BLOCKING HOST " + host);
                 log.Info("************");
 
             }
-            sb.Append(endCarbonBlockerSection);
+            sb.Append(endCarbonBlockerSection + Environment.NewLine);
 
 
             //backup

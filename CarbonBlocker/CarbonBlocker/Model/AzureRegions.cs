@@ -14,10 +14,10 @@ namespace CarbonBlocker.Model
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
         private Dictionary<String, NamedGeoposition> regionGeopositionMapping = new Dictionary<string, NamedGeoposition>();
-        public AzureRegions()
+        public AzureRegions(string azureRegionFilePath)
         {
-            var path = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName.Replace(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName, "");
-            var data = File.ReadAllText(path + "azure-regions.json");
+            //var path = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName.Replace(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName, "");
+            var data = File.ReadAllText(azureRegionFilePath);
             List<NamedGeoposition> regionList = JsonSerializer.Deserialize<List<NamedGeoposition>>(data, options) ?? new List<NamedGeoposition>();
             foreach (NamedGeoposition region in regionList)
             {
