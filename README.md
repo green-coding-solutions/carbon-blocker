@@ -4,7 +4,7 @@ With Carbon Blocker we have create a tool that saves over-intensive carbon emiss
 by blocking network DNS resolution when the carbon intensity is high.
 
 It does this by hooking into standard mechanisms on the operating system, 
-namely the hosts.txt on Windows or /etc/hosts on Unix like systems.
+namely the *hosts* on Windows and Unix like systems.
 The file is only modified when the CarbonAwareSDK from the Green Software Foundation
 delivers a grid intensity higher than 50 gCO2e/kWh.
 
