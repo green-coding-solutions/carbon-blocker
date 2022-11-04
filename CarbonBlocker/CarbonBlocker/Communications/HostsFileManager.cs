@@ -22,7 +22,7 @@ namespace CarbonBlocker.Communications
             foreach (string url in urls)
             {
                 string host = new Uri(url).Host.ToLower();
-                sb.Append("127.0.0.1    " + host + Environment.NewLine);
+                sb.Append("0.0.0.0    " + host + Environment.NewLine);
                 //Block site on /etc/hosts
                 log.Info("************");
                 log.Info("BLOCKING HOST " + host);
