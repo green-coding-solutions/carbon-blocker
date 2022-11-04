@@ -41,6 +41,10 @@ by the community so that it generates the most value and impact.
 
 So this is our short summary. We hope you like the project as much as we do :)
 
+## Youtube Pitch
+
+See our pitch on Youtube for a short intro: https://www.youtube.com/watch?v=U3Ry-VitNOI
+
 ## Supported Platforms
 
 CarbonBlocker runs on all major platforms:
